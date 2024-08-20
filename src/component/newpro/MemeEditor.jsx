@@ -6,6 +6,8 @@ import ColorPicker from "./ColorPicker";
 import FontSelector from "./FontSelector";
 import FontSizeSelector from "./FontSizeSelector";
 
+import TextIcon from "../../assets/textEditor/Lowercase.png";
+
 const MemeEditor = ({ image }) => {
   const [texts, setTexts] = useState([]);
   const [selectedTextId, setSelectedTextId] = useState(null);
@@ -143,87 +145,111 @@ const MemeEditor = ({ image }) => {
   };
 
   return (
-    <div
-      style={{ display: "flex", alignItems: "flex-start" }}
-      className="bg-slate-500"
-    >
-      <div style={{ position: "relative", width: "500px" }}>
-        <div
-          ref={memeRef}
-          style={{ position: "relative", display: "inline-block" }}
-        >
-          <img
-            src={image}
-            alt="Meme"
-            style={{ width: "100%", height: "auto" }}
-          />
-          {texts.map((text) => (
-            <Draggable
-              key={text.id}
-              defaultPosition={{ x: text.x, y: text.y }}
-              onStop={(e, data) => {
-                const newTexts = texts.map((t) =>
-                  t.id === text.id ? { ...t, x: data.x, y: data.y } : t
-                );
-                setTexts(newTexts);
-              }}
+    <div className="bg-[#e95151] grid grid-cols-12">
+      <div className="bg-[#518ee9] col-span-2">01</div>
+      <div className="bg-[#51e990] col-span-8 flex justify-center">
+        <div>
+          <div style={{ position: "relative", width: "500px" }}>
+            <div
+              ref={memeRef}
+              style={{ position: "relative", display: "inline-block" }}
             >
-              <div
-                id={`text-${text.id}`}
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  color: text.color,
-                  fontSize: `${text.fontSize}px`,
-                  fontWeight: text.fontWeight,
-                  textDecoration: text.textDecoration,
-                  fontStyle: text.fontStyle,
-                  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-                  fontFamily: text.fontStyle,
-                  cursor: "move",
-                  border:
-                    text.id === selectedTextId ? "2px dotted #000" : "none",
-                }}
-                onClick={() => handleSelectText(text.id)}
-              >
-                {text.text}
-              </div>
-            </Draggable>
-          ))}
+              <img
+                src={image}
+                alt="Meme"
+                style={{ width: "100%", height: "auto" }}
+              />
+              {texts.map((text) => (
+                <Draggable
+                  key={text.id}
+                  defaultPosition={{ x: text.x, y: text.y }}
+                  onStop={(e, data) => {
+                    const newTexts = texts.map((t) =>
+                      t.id === text.id ? { ...t, x: data.x, y: data.y } : t
+                    );
+                    setTexts(newTexts);
+                  }}
+                >
+                  <div
+                    id={`text-${text.id}`}
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      color: text.color,
+                      fontSize: `${text.fontSize}px`,
+                      fontWeight: text.fontWeight,
+                      textDecoration: text.textDecoration,
+                      fontStyle: text.fontStyle,
+                      textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+                      fontFamily: text.fontStyle,
+                      cursor: "move",
+                      border:
+                        text.id === selectedTextId ? "2px dotted #000" : "none",
+                    }}
+                    onClick={() => handleSelectText(text.id)}
+                  >
+                    {text.text}
+                  </div>
+                </Draggable>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
-      {selectedTextId !== null && (
-        <div style={{ marginLeft: "50px" }}>
-          <TextEditor
-            text={texts.find((text) => text.id === selectedTextId)}
-            onTextChange={handleTextChange}
-            onAddText={handleAddText}
-            onDeleteText={handleDeleteText}
-            onToggleBold={handleToggleBold}
-            onToggleItalic={handleToggleItalic}
-            onToggleUnderline={handleToggleUnderline}
-            isAddDisabled={texts.length >= 4}
-          />
-          <ColorPicker
-            currentColor={currentColor}
-            onColorChange={handleColorChange}
-          />
-          <FontSelector
-            currentFont={
-              texts.find((text) => text.id === selectedTextId)?.fontStyle
-            }
-            onFontChange={handleFontChange}
-          />
-          <FontSizeSelector
-            currentSize={
-              texts.find((text) => text.id === selectedTextId)?.fontSize
-            }
-            onSizeChange={handleFontSizeChange}
-          />
-          <button onClick={handleDownloadMeme}>Download Meme</button>
+
+      <div className="bg-[#d2e951] col-span-2">
+        <div className="flex items-center gap-6 mb-6">
+          <img src={TextIcon} alt="My Image" />
+          <p className="self-end">Text</p>
         </div>
-      )}
+        <div className="bg-slate-500 flex">
+          {selectedTextId !== null && (
+            <div className="w-full">
+              <div className="bg-[#2888e7]">
+                <TextEditor
+                  text={texts.find((text) => text.id === selectedTextId)}
+                  onTextChange={handleTextChange}
+                  onAddText={handleAddText}
+                  onDeleteText={handleDeleteText}
+                  onToggleBold={handleToggleBold}
+                  onToggleItalic={handleToggleItalic}
+                  onToggleUnderline={handleToggleUnderline}
+                  isAddDisabled={texts.length >= 4}
+                />
+              </div>
+              <div className="mb-4">
+                <ColorPicker
+                  currentColor={currentColor}
+                  onColorChange={handleColorChange}
+                />
+              </div>
+
+              <div className="mb-4">
+                <FontSelector
+                  currentFont={
+                    texts.find((text) => text.id === selectedTextId)?.fontStyle
+                  }
+                  onFontChange={handleFontChange}
+                />
+              </div>
+
+              <div className="mb-4">
+                <FontSizeSelector
+                  currentSize={
+                    texts.find((text) => text.id === selectedTextId)?.fontSize
+                  }
+                  onSizeChange={handleFontSizeChange}
+                />
+              </div>
+
+              <div className="flex items-center justify-center">
+                <button onClick={handleDownloadMeme}>Download Meme</button>{" "}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

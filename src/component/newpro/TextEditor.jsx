@@ -11,22 +11,25 @@ const TextEditor = ({
   isAddDisabled,
 }) => {
   return (
-    <div>
-      <input
-        type="text"
-        value={text.text || ""}
-        onChange={onTextChange}
-        placeholder="Enter text"
-      />
-
-      <div className="flex flex-col">
-        <button onClick={onAddText} disabled={isAddDisabled}>
-          <p>Add Another Text</p>
-        </button>
-        <button onClick={onDeleteText}>Delete Selected Text</button>
+    <div className="">
+      <div className="mb-4">
+        <input
+          type="text"
+          value={text.text || ""}
+          className="h-[40px] w-full"
+          onChange={onTextChange}
+          placeholder="Enter text"
+        />
       </div>
 
-      <div>
+      <div className="flex gap-4 bg-[#29e6e6] mb-4">
+        <button onClick={onAddText} disabled={isAddDisabled}>
+          Add Text
+        </button>
+        <button onClick={onDeleteText}>Delete Text</button>
+      </div>
+
+      <div className="mb-4">
         <button
           onClick={onToggleBold}
           style={{ fontWeight: text.fontWeight === "bold" ? "bold" : "normal" }}
