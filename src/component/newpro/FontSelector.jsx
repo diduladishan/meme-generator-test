@@ -3,7 +3,7 @@ import React from "react";
 const FontSelector = ({ currentFont, onFontChange }) => {
   return (
     <div>
-      <h3>Select Font Style:</h3>
+      <h3 className="text-white mb-2">Select Font Style:</h3>
       <select value={currentFont} onChange={onFontChange}>
         <option value="Roboto">Roboto</option>
         <option value="Lobster">Lobster</option>

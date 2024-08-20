@@ -145,9 +145,9 @@ const MemeEditor = ({ image }) => {
   };
 
   return (
-    <div className="bg-[#e95151] grid grid-cols-12">
-      <div className="bg-[#518ee9] col-span-2">01</div>
-      <div className="bg-[#51e990] col-span-8 flex justify-center">
+    <div className="grid grid-cols-12">
+      <div className="bg-[#191919] col-span-2">01</div>
+      <div className="bg-[#191919] col-span-8 flex justify-center border border-[#535353]">
         <div>
           <div style={{ position: "relative", width: "500px" }}>
             <div
@@ -198,15 +198,16 @@ const MemeEditor = ({ image }) => {
         </div>
       </div>
 
-      <div className="bg-[#d2e951] col-span-2">
+      <div className="bg-[#191919] col-span-2">
         <div className="flex items-center gap-6 mb-6">
           <img src={TextIcon} alt="My Image" />
-          <p className="self-end">Text</p>
+          <p className="self-end text-white">Text</p>
         </div>
-        <div className="bg-slate-500 flex">
+
+        <div className="flex">
           {selectedTextId !== null && (
             <div className="w-full">
-              <div className="bg-[#2888e7]">
+              <div className=" border-b border-[#535353] py-3 px-4">
                 <TextEditor
                   text={texts.find((text) => text.id === selectedTextId)}
                   onTextChange={handleTextChange}
@@ -218,14 +219,15 @@ const MemeEditor = ({ image }) => {
                   isAddDisabled={texts.length >= 4}
                 />
               </div>
-              <div className="mb-4">
+
+              <div className="border-b border-[#535353] py-3 px-4">
                 <ColorPicker
                   currentColor={currentColor}
                   onColorChange={handleColorChange}
                 />
               </div>
 
-              <div className="mb-4">
+              <div className="border-b border-[#535353] py-3 px-4">
                 <FontSelector
                   currentFont={
                     texts.find((text) => text.id === selectedTextId)?.fontStyle
@@ -234,7 +236,7 @@ const MemeEditor = ({ image }) => {
                 />
               </div>
 
-              <div className="mb-4">
+              <div className="border-b border-[#535353] py-3 px-4">
                 <FontSizeSelector
                   currentSize={
                     texts.find((text) => text.id === selectedTextId)?.fontSize
@@ -243,7 +245,7 @@ const MemeEditor = ({ image }) => {
                 />
               </div>
 
-              <div className="flex items-center justify-center">
+              <div className="flex items-center justify-center text-white py-3">
                 <button onClick={handleDownloadMeme}>Download Meme</button>{" "}
               </div>
             </div>

@@ -1,4 +1,9 @@
 import React from "react";
+import {
+  MdFormatBold,
+  MdFormatUnderlined,
+  MdFormatItalic,
+} from "react-icons/md";
 
 const TextEditor = ({
   text,
@@ -22,19 +27,19 @@ const TextEditor = ({
         />
       </div>
 
-      <div className="flex gap-4 bg-[#29e6e6] mb-4">
+      <div className="mb-4 flex gap-4 text-white">
         <button onClick={onAddText} disabled={isAddDisabled}>
           Add Text
         </button>
         <button onClick={onDeleteText}>Delete Text</button>
       </div>
 
-      <div className="mb-4">
+      <div className="text-white flex gap-4">
         <button
           onClick={onToggleBold}
           style={{ fontWeight: text.fontWeight === "bold" ? "bold" : "normal" }}
         >
-          Bold
+          <MdFormatBold className="text-[24px]" />
         </button>
         <button
           onClick={onToggleItalic}
@@ -42,7 +47,7 @@ const TextEditor = ({
             fontStyle: text.fontStyle === "italic" ? "italic" : "normal",
           }}
         >
-          Italic
+          <MdFormatItalic className="text-[24px]" />
         </button>
         <button
           onClick={onToggleUnderline}
@@ -51,7 +56,7 @@ const TextEditor = ({
               text.textDecoration === "underline" ? "underline" : "none",
           }}
         >
-          Underline
+          <MdFormatUnderlined className="text-[24px]" />
         </button>
       </div>
     </div>

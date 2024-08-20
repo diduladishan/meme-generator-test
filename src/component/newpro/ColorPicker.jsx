@@ -6,14 +6,14 @@ const ColorPicker = ({ currentColor, onColorChange }) => {
 
   return (
     <div>
-      <h3>Select Text Color:</h3>
+      <h3 className="text-white mb-2">Select Text Color:</h3>
       <button
         onClick={() => setShowColorPicker(!showColorPicker)}
         style={{
           backgroundColor: currentColor,
           width: "50px",
           height: "50px",
-          border: "none",
+          border: "2px solid white",
           cursor: "pointer",
         }}
       />
